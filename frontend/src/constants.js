@@ -1,1 +1,1 @@
-export const API_BACKEND="http://localhost:8000"
+export const API_BACKEND=`http://${process.env.REACT_APP_BACKEND_URL}:${process.env.REACT_APP_BACKEND_PORT}`
