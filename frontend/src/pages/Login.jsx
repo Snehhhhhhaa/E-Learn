@@ -18,7 +18,7 @@ export default function LoginPage() {
             });
             if (password === response.data.password) {
                 setIsLoggedIn(true)
-                navigate("/")
+                navigate("/home")
                 return
             }
 
