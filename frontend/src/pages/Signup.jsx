@@ -1,12 +1,16 @@
 // Signup.js
 import React, { useState } from "react";
 import axios from "axios";
+import { API_BACKEND } from "../constants";
+import { useNavigate } from "react-router";
 
-const Signup = () => {
+export const Signup = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,8 +23,9 @@ const Signup = () => {
     };
 
     try {
-      const response = await axios.post("https://your-api-endpoint.com/signup", userData);
+      const response = await axios.post(API_BACKEND + "/signup" + "?username=" + username + "&password=" + password);
       console.log("Signup successful", response.data);
+      navigate("/login")
     } catch (err) {
       setError("Signup failed. Please try again.");
       console.error("Error during signup", err);
@@ -62,4 +67,3 @@ const Signup = () => {
   );
 };
 
-export default Signup;

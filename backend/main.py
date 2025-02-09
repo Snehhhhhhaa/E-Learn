@@ -27,6 +27,7 @@ def get_machine_learning_finance():
     conn, cursor = get_db()
     try:
         cursor.execute("SELECT * FROM machine_learning_finance")  # Adjust table name as needed
+        # ORM # jwt authentication # postman
         rows = cursor.fetchall()
         
         data = [
@@ -68,7 +69,7 @@ def get_user(username: str):
         return {"error": str(e)}
 
 # Endpoint to create a new user (POST request)
-@app.post("/user/")
+@app.post("/signup/")
 def create_user(username: str, password: str):
     conn, cursor = get_db()
     try:

@@ -1,10 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { API_BACKEND } from './constants';
+import { getIsLoggedIn } from './utils'
+import { useNavigate } from 'react-router';
 
 const App = () => {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const isLoggedIn = getIsLoggedIn()
+    if (!isLoggedIn) {
+      navigate("/login")
+      return
+    }
+  }, [])
 
   // Function to fetch the machine learning finance data
   const fetchData = async () => {
@@ -12,7 +24,7 @@ const App = () => {
     setError(null);
 
     try {
-      const response = await axios.get('http://localhost:8000/machine-learning-finance');
+      const response = await axios.get(API_BACKEND + '/machine-learning-finance');
       setData(response.data.data);  // Set the response data
     } catch (err) {
       setError('Error fetching data');
